@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShentuBot</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='10' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23fe2c55'/><stop offset='100%25' stop-color='%2325f4ee'/></linearGradient></defs><text x='20' y='28' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='700' font-size='24'>S</text></svg>" type="image/svg+xml">
+    <title>ShentuBot - TikTok Content Publisher</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
 
@@ -84,23 +83,6 @@
         }
 
         .logo-text span { color: var(--accent); }
-
-        .header-nav {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .header-nav a {
-            color: var(--text2);
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-
-        .header-nav a:hover {
-            color: var(--text);
-        }
 
         .user-info {
             display: flex;
@@ -573,10 +555,6 @@
                 <div class="logo-icon">S</div>
                 <div class="logo-text">Shentu<span>Bot</span></div>
             </div>
-            <div class="header-nav">
-                <a href="privacy-policy.html">Privacy Policy</a>
-                <a href="terms-of-service.html">Terms of Service</a>
-            </div>
             <div class="user-info" id="userInfo" style="display:none">
                 <div class="avatar"></div>
                 <span id="userName">shentu_user</span>
@@ -813,7 +791,7 @@ POST /v2/post/publish/status/fetch/ → 200 OK
         <!-- Footer -->
         <div class="footer">
             <p>ShentuBot uses the <a href="https://developers.tiktok.com/doc/content-posting-api-get-started" target="_blank">TikTok Content Posting API</a> with explicit user authorization.</p>
-            <p style="margin-top:4px"><a href="terms-of-service.html">Terms of Service</a> · <a href="privacy-policy.html">Privacy Policy</a></p>
+            <p style="margin-top:4px"><a href="/terms">Terms of Service</a> · <a href="/privacy">Privacy Policy</a></p>
         </div>
     </div>
 

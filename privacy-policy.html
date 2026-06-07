@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShentuBot Privacy Policy</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='10' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23fe2c55'/><stop offset='100%25' stop-color='%2325f4ee'/></linearGradient></defs><text x='20' y='28' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='700' font-size='24'>S</text></svg>" type="image/svg+xml">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface2: #1a1a26;
+            --border: #2a2a3a;
+            --text: #e8e8f0;
+            --text2: #8888a0;
+            --accent: #fe2c55;
+            --accent2: #25f4ee;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(254,44,85,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(37,244,238,0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--text);
+        }
+
+        .logo-text span { color: var(--accent); }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover { color: var(--text); }
+
+        .page-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0 auto 24px;
+        }
+
+        .page-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .page-updated {
+            text-align: center;
+            color: var(--text2);
+            font-size: 14px;
+            margin-bottom: 48px;
+        }
+
+        .content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            line-height: 1.8;
+        }
+
+        .content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .content h2:first-child {
+            margin-top: 0;
+        }
+
+        .content p {
+            margin-bottom: 16px;
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .content ul, .content ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .content li {
+            margin-bottom: 8px;
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .content strong {
+            color: var(--text);
+        }
+
+        .content a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 12px 24px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--accent2);
+            text-decoration: none;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text2);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">S</div>
+                <div class="logo-text">Shentu<span>Bot</span></div>
+            </a>
+            <div class="header-nav">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+            </div>
+        </div>
+
+        <div class="page-icon">S</div>
+        <h1 class="page-title">ShentuBot Privacy Policy</h1>
+        <p class="page-updated">Last updated: June 7, 2026</p>
+
+        <div class="content">
+            <h2>1. Introduction</h2>
+            <p>Welcome to ShentuBot ("we," "our," or "us"). We are committed to protecting your privacy and ensuring that your personal information is handled responsibly. This Privacy Policy explains how ShentuBot collects, uses, discloses, and safeguards your information when you use our application and related services (collectively, the "Service").</p>
+            <p>By using ShentuBot, you agree to the collection and use of information in accordance with this policy. If you do not agree with the terms of this Privacy Policy, please do not access the Service.</p>
+
+            <h2>2. Information We Collect</h2>
+            <p>ShentuBot collects the following types of information:</p>
+            <p><strong>2.1 Information You Provide Directly</strong></p>
+            <ul>
+                <li><strong>Account Information:</strong> When you connect your TikTok account to ShentuBot, we receive your TikTok username, display name, and profile picture as authorized by you through the TikTok API.</li>
+                <li><strong>Content Data:</strong> Videos, images, text, and other content you create or upload through ShentuBot for publishing to TikTok.</li>
+                <li><strong>Communication Data:</strong> Any information you provide when contacting our support team, including email addresses and message content.</li>
+            </ul>
+            <p><strong>2.2 Information Collected Automatically</strong></p>
+            <ul>
+                <li><strong>Usage Data:</strong> Information about how you use ShentuBot, including features accessed, actions taken, time spent, and interaction patterns.</li>
+                <li><strong>Device Information:</strong> Device type, operating system, browser type, screen resolution, and unique device identifiers.</li>
+                <li><strong>Log Data:</strong> IP address, access times, pages viewed, and referring URLs collected automatically when you use the Service.</li>
+            </ul>
+            <p><strong>2.3 Information from TikTok API</strong></p>
+            <ul>
+                <li><strong>Authorization Tokens:</strong> OAuth access tokens and refresh tokens required to publish content on your behalf.</li>
+                <li><strong>Profile Information:</strong> Basic profile data as permitted by the scopes you authorize, including your TikTok user ID and username.</li>
+                <li><strong>Publishing Status:</strong> Information about the status of content published through the TikTok Content Posting API.</li>
+            </ul>
+
+            <h2>3. How We Use Your Information</h2>
+            <p>ShentuBot uses the information we collect for the following purposes:</p>
+            <ol>
+                <li><strong>Service Delivery:</strong> To provide, maintain, and improve the core functionality of ShentuBot, including publishing content to your TikTok account as authorized by you.</li>
+                <li><strong>Authentication:</strong> To verify your identity and manage your authorized connection to TikTok.</li>
+                <li><strong>Communication:</strong> To respond to your inquiries, provide technical support, and send you important notifications about the Service.</li>
+                <li><strong>Analytics and Improvement:</strong> To analyze usage patterns, diagnose technical issues, and improve the performance and user experience of ShentuBot.</li>
+                <li><strong>Security:</strong> To detect, prevent, and address fraud, unauthorized access, and other illegal activities, and to protect the security of our Service and users.</li>
+                <li><strong>Compliance:</strong> To comply with applicable laws, regulations, and legal processes.</li>
+            </ol>
+
+            <h2>4. Data Sharing and Disclosure</h2>
+            <p>ShentuBot does not sell, trade, or rent your personal information to third parties. We may share your information in the following circumstances:</p>
+            <ul>
+                <li><strong>With TikTok:</strong> We share content and authorization data with TikTok as necessary to publish content on your behalf through the TikTok Content Posting API. This sharing is governed by TikTok's own privacy policy and the permissions you grant.</li>
+                <li><strong>Service Providers:</strong> We may share information with trusted third-party service providers who assist us in operating the Service, provided they are bound by confidentiality obligations.</li>
+                <li><strong>Legal Requirements:</strong> We may disclose information if required by law, regulation, or legal process, or if we believe in good faith that disclosure is necessary to protect our rights or the safety of others.</li>
+                <li><strong>Business Transfers:</strong> In the event of a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction, subject to continued protection under this Privacy Policy.</li>
+            </ul>
+
+            <h2>5. Data Storage and Security</h2>
+            <p><strong>5.1 Data Storage</strong></p>
+            <p>Your data is stored on secure servers with appropriate technical and organizational measures to protect against unauthorized access, alteration, disclosure, or destruction. We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required by law.</p>
+            <p><strong>5.2 Security Measures</strong></p>
+            <p>ShentuBot implements industry-standard security measures, including:</p>
+            <ul>
+                <li>Encryption of data in transit using TLS/SSL protocols.</li>
+                <li>Secure storage of OAuth tokens using encryption at rest.</li>
+                <li>Regular security assessments and vulnerability testing.</li>
+                <li>Access controls limiting employee access to personal data on a need-to-know basis.</li>
+            </ul>
+            <p>While we strive to protect your information, no method of transmission or storage is 100% secure. We cannot guarantee absolute security of your data.</p>
+
+            <h2>6. Your Rights</h2>
+            <p>Depending on your jurisdiction, you may have the following rights regarding your personal information:</p>
+            <ul>
+                <li><strong>Access:</strong> The right to request a copy of the personal information we hold about you.</li>
+                <li><strong>Rectification:</strong> The right to request correction of inaccurate or incomplete personal information.</li>
+                <li><strong>Deletion:</strong> The right to request deletion of your personal information, subject to legal retention requirements.</li>
+                <li><strong>Data Portability:</strong> The right to receive your personal information in a structured, commonly used, machine-readable format.</li>
+                <li><strong>Withdrawal of Consent:</strong> The right to withdraw your consent for data processing at any time by disconnecting your TikTok account from ShentuBot.</li>
+                <li><strong>Objection:</strong> The right to object to certain types of processing of your personal information.</li>
+            </ul>
+            <p>To exercise any of these rights, please contact us using the information provided in Section 11 below. We will respond to your request within 30 days.</p>
+
+            <h2>7. Cookies and Tracking Technologies</h2>
+            <p>ShentuBot may use cookies and similar tracking technologies to enhance your experience:</p>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Required for the basic functionality of the Service, such as maintaining your session and authentication state.</li>
+                <li><strong>Analytics Cookies:</strong> Used to understand how users interact with the Service, helping us improve performance and user experience.</li>
+                <li><strong>Preference Cookies:</strong> Used to remember your settings and preferences for a personalized experience.</li>
+            </ul>
+            <p>You can manage your cookie preferences through your browser settings. Disabling certain cookies may affect the functionality of ShentuBot.</p>
+
+            <h2>8. Third-Party Services</h2>
+            <p><strong>8.1 TikTok API Integration</strong></p>
+            <p>ShentuBot integrates with the TikTok Content Posting API to publish content on your behalf. When you authorize ShentuBot through TikTok's OAuth flow:</p>
+            <ul>
+                <li>You grant ShentuBot specific permissions (scopes) as displayed during the authorization process.</li>
+                <li>ShentuBot will only access data and perform actions within the scope of your authorization.</li>
+                <li>Your use of TikTok through ShentuBot is also subject to TikTok's Terms of Service and Privacy Policy.</li>
+                <li>You may revoke ShentuBot's access at any time through your TikTok account settings.</li>
+            </ul>
+            <p><strong>8.2 Other Third-Party Services</strong></p>
+            <p>ShentuBot may use other third-party services for analytics, hosting, and communication. These services have their own privacy policies, and we encourage you to review them. ShentuBot is not responsible for the privacy practices of third-party services.</p>
+
+            <h2>9. Children's Privacy</h2>
+            <p>ShentuBot is not intended for use by individuals under the age of 13 (or the applicable age of consent in your jurisdiction). We do not knowingly collect personal information from children. If we become aware that we have collected personal information from a child without verification of parental consent, we will take steps to delete that information promptly. If you believe that a child has provided us with personal information, please contact us immediately.</p>
+
+            <h2>10. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technologies, legal requirements, or other factors. When we make changes, we will:</p>
+            <ul>
+                <li>Update the "Last updated" date at the top of this page.</li>
+                <li>Notify you of material changes through the Service or by other appropriate means.</li>
+                <li>Obtain your consent where required by applicable law.</li>
+            </ul>
+            <p>Your continued use of ShentuBot after any changes to this Privacy Policy constitutes your acceptance of the updated policy.</p>
+
+            <h2>11. Contact Us</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or ShentuBot's data practices, please contact us at:</p>
+            <ul>
+                <li><strong>Email:</strong> privacy@shentubot.com</li>
+                <li><strong>Website:</strong> <a href="https://xiangzi0215.github.io/shentubot/">https://xiangzi0215.github.io/shentubot/</a></li>
+            </ul>
+            <p>We will make our best effort to respond to your inquiry within 30 days.</p>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to ShentuBot</a>
+
+        <div class="footer">
+            <p><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms of Service</a></p>
+            <p style="margin-top:4px">© 2026 ShentuBot. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

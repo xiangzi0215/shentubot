@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShentuBot Terms of Service</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='10' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23fe2c55'/><stop offset='100%25' stop-color='%2325f4ee'/></linearGradient></defs><text x='20' y='28' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='700' font-size='24'>S</text></svg>" type="image/svg+xml">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface2: #1a1a26;
+            --border: #2a2a3a;
+            --text: #e8e8f0;
+            --text2: #8888a0;
+            --accent: #fe2c55;
+            --accent2: #25f4ee;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(254,44,85,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(37,244,238,0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: var(--text);
+        }
+
+        .logo-text span { color: var(--accent); }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover { color: var(--text); }
+
+        .page-icon {
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            color: white;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+            margin: 0 auto 24px;
+        }
+
+        .page-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .page-updated {
+            text-align: center;
+            color: var(--text2);
+            font-size: 14px;
+            margin-bottom: 48px;
+        }
+
+        .content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px;
+            line-height: 1.8;
+        }
+
+        .content h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-top: 36px;
+            margin-bottom: 16px;
+            color: var(--text);
+        }
+
+        .content h2:first-child {
+            margin-top: 0;
+        }
+
+        .content p {
+            margin-bottom: 16px;
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .content ul, .content ol {
+            margin-bottom: 16px;
+            padding-left: 24px;
+        }
+
+        .content li {
+            margin-bottom: 8px;
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .content strong {
+            color: var(--text);
+        }
+
+        .content a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+
+        .content a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 32px;
+            padding: 12px 24px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--accent2);
+            text-decoration: none;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text2);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">S</div>
+                <div class="logo-text">Shentu<span>Bot</span></div>
+            </a>
+            <div class="header-nav">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+            </div>
+        </div>
+
+        <div class="page-icon">S</div>
+        <h1 class="page-title">ShentuBot Terms of Service</h1>
+        <p class="page-updated">Last updated: June 7, 2026</p>
+
+        <div class="content">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing or using ShentuBot ("the Service"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to all of these Terms, you may not access or use the Service. These Terms constitute a legally binding agreement between you and ShentuBot.</p>
+            <p>You must be at least 13 years old (or the age of majority in your jurisdiction) to use ShentuBot. By using the Service, you represent and warrant that you meet this age requirement.</p>
+
+            <h2>2. Description of Service</h2>
+            <p>ShentuBot is an application that enables users to create, manage, and publish content to their TikTok accounts through the TikTok Content Posting API. The Service includes, but is not limited to:</p>
+            <ul>
+                <li>Connecting your TikTok account via secure OAuth authorization.</li>
+                <li>Browsing and selecting promotional tasks and campaigns.</li>
+                <li>Generating and reviewing content for publication.</li>
+                <li>Publishing videos and other content directly to your TikTok account.</li>
+                <li>Tracking the status of published content.</li>
+            </ul>
+            <p>ShentuBot reserves the right to modify, suspend, or discontinue any aspect of the Service at any time, with or without notice.</p>
+
+            <h2>3. User Accounts</h2>
+            <p>To use ShentuBot, you must connect your TikTok account through the TikTok OAuth authorization flow. By doing so, you agree to:</p>
+            <ol>
+                <li>Provide accurate and complete information as required by the authorization process.</li>
+                <li>Maintain the security and confidentiality of your authorization credentials.</li>
+                <li>Accept responsibility for all activities that occur under your connected account.</li>
+                <li>Notify ShentuBot immediately of any unauthorized use of your account.</li>
+            </ol>
+            <p>You may disconnect your TikTok account from ShentuBot at any time through your TikTok account settings or by contacting us. ShentuBot is not liable for any loss of data or functionality resulting from account disconnection.</p>
+
+            <h2>4. User Content</h2>
+            <p>You retain all ownership rights to content you create, upload, or publish through ShentuBot. By using the Service to publish content, you grant ShentuBot a limited, non-exclusive license to process, transmit, and publish that content on your behalf through the TikTok API.</p>
+            <p>You represent and warrant that:</p>
+            <ul>
+                <li>You own or have the necessary rights to all content you publish through ShentuBot.</li>
+                <li>Your content does not violate any applicable law, regulation, or third-party right.</li>
+                <li>Your content complies with TikTok's Community Guidelines and Terms of Service.</li>
+            </ul>
+            <p>ShentuBot is not responsible for the content you choose to publish and reserves the right to refuse to publish any content that violates these Terms.</p>
+
+            <h2>5. TikTok Integration</h2>
+            <p>ShentuBot integrates with TikTok through the TikTok Content Posting API. Your use of this integration is subject to the following conditions:</p>
+            <ol>
+                <li><strong>Authorization:</strong> You must explicitly authorize ShentuBot to access your TikTok account through TikTok's OAuth flow. ShentuBot will only request the minimum permissions necessary to provide the Service.</li>
+                <li><strong>Scope of Access:</strong> ShentuBot will only access your TikTok data and perform actions within the scope of the permissions you have granted. We will not access or store data beyond what is necessary for the Service.</li>
+                <li><strong>Compliance:</strong> Your use of TikTok through ShentuBot is subject to TikTok's Terms of Service, Community Guidelines, and Developer Terms. ShentuBot is not responsible for TikTok's policies or enforcement actions.</li>
+                <li><strong>Revocation:</strong> You may revoke ShentuBot's access to your TikTok account at any time through your TikTok account settings. Upon revocation, ShentuBot will cease all access to your TikTok data and will delete stored authorization tokens.</li>
+                <li><strong>API Availability:</strong> ShentuBot's ability to publish content depends on the availability and functionality of the TikTok API. We are not responsible for any interruptions, changes, or discontinuations of the TikTok API.</li>
+            </ol>
+
+            <h2>6. Prohibited Activities</h2>
+            <p>When using ShentuBot, you agree not to:</p>
+            <ol>
+                <li>Violate any applicable law, regulation, or third-party right.</li>
+                <li>Publish content that is illegal, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, or otherwise objectionable.</li>
+                <li>Impersonate any person or entity, or falsely represent your affiliation with any person or entity.</li>
+                <li>Use the Service for any unauthorized commercial solicitation or spam.</li>
+                <li>Attempt to gain unauthorized access to any portion of the Service, other accounts, or any systems or networks connected to the Service.</li>
+                <li>Use the Service in any manner that could damage, disable, overburden, or impair the Service or interfere with any other party's use of the Service.</li>
+                <li>Use automated tools, bots, or scripts to access the Service in a manner not authorized by ShentuBot.</li>
+                <li>Reverse engineer, decompile, disassemble, or otherwise attempt to discover the source code of ShentuBot.</li>
+                <li>Use the Service to violate TikTok's Terms of Service or Community Guidelines.</li>
+                <li>Create multiple accounts or use the Service on behalf of others without authorization.</li>
+            </ol>
+            <p>ShentuBot reserves the right to suspend or terminate your access to the Service for any violation of these prohibitions.</p>
+
+            <h2>7. Intellectual Property</h2>
+            <p>The Service and its original content (excluding content provided by users), features, and functionality are and shall remain the exclusive property of ShentuBot and its licensors. The Service is protected by copyright, trademark, and other laws of both the United States and foreign countries.</p>
+            <p>Our trademarks, service marks, and trade dress may not be used in connection with any product or service without the prior written consent of ShentuBot.</p>
+            <p>You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Service for your personal, non-commercial use, subject to these Terms.</p>
+
+            <h2>8. Disclaimers</h2>
+            <p>THE SERVICE IS PROVIDED ON AN "AS IS" AND "AS AVAILABLE" BASIS WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.</p>
+            <p>ShentuBot does not warrant that:</p>
+            <ul>
+                <li>The Service will be uninterrupted, timely, secure, or error-free.</li>
+                <li>The results obtained from the use of the Service will be accurate or reliable.</li>
+                <li>The quality of any content, information, or other material obtained through the Service will meet your expectations.</li>
+                <li>Any errors in the Service will be corrected.</li>
+            </ul>
+            <p>You assume all responsibility for any content published through the Service and for any consequences arising from such publication.</p>
+
+            <h2>9. Limitation of Liability</h2>
+            <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL SHENTUBOT, ITS DIRECTORS, EMPLOYEES, PARTNERS, AGENTS, SUPPLIERS, OR AFFILIATES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, INCLUDING WITHOUT LIMITATION LOSS OF PROFITS, DATA, USE, GOODWILL, OR OTHER INTANGIBLE LOSSES, RESULTING FROM:</p>
+            <ol>
+                <li>Your access to or use of (or inability to access or use) the Service.</li>
+                <li>Any conduct or content of any third party on the Service.</li>
+                <li>Any content obtained from the Service.</li>
+                <li>Unauthorized access, use, or alteration of your transmissions or content.</li>
+                <li>Any actions taken by TikTok in relation to content published through the Service.</li>
+            </ol>
+            <p>IN NO EVENT SHALL SHENTUBOT'S TOTAL LIABILITY TO YOU FOR ALL CLAIMS EXCEED THE AMOUNT YOU HAVE PAID TO SHENTUBOT FOR THE SERVICE DURING THE PRECEDING TWELVE (12) MONTHS, OR ONE HUNDRED DOLLARS ($100), WHICHEVER IS GREATER.</p>
+
+            <h2>10. Indemnification</h2>
+            <p>You agree to defend, indemnify, and hold harmless ShentuBot and its officers, directors, employees, agents, and affiliates from and against any claims, liabilities, damages, losses, and expenses, including without limitation reasonable attorney fees and costs, arising out of or in any way connected with:</p>
+            <ol>
+                <li>Your access to or use of the Service.</li>
+                <li>Your violation of these Terms.</li>
+                <li>Your violation of any rights of another party, including any intellectual property or privacy right.</li>
+                <li>Any content you publish through the Service.</li>
+            </ol>
+
+            <h2>11. Changes to Terms</h2>
+            <p>ShentuBot reserves the right to modify or replace these Terms at any time at its sole discretion. If a revision is material, we will make reasonable efforts to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+            <p>By continuing to access or use the Service after any revisions become effective, you agree to be bound by the revised Terms. If you do not agree to the new Terms, you must stop using the Service.</p>
+
+            <h2>12. Governing Law</h2>
+            <p>These Terms shall be governed and construed in accordance with the laws of the jurisdiction in which ShentuBot operates, without regard to its conflict of law provisions.</p>
+            <p>Any disputes arising out of or relating to these Terms or the Service shall be resolved through binding arbitration in accordance with the rules of the applicable arbitration association, and you consent to personal jurisdiction and venue in the courts of the governing jurisdiction.</p>
+            <p>If any provision of these Terms is held to be invalid or unenforceable, the remaining provisions will remain in full force and effect.</p>
+
+            <h2>13. Contact Information</h2>
+            <p>If you have any questions about these Terms of Service, please contact us at:</p>
+            <ul>
+                <li><strong>Email:</strong> legal@shentubot.com</li>
+                <li><strong>Website:</strong> <a href="https://xiangzi0215.github.io/shentubot/">https://xiangzi0215.github.io/shentubot/</a></li>
+            </ul>
+            <p>We will make our best effort to respond to your inquiry within 30 days.</p>
+        </div>
+
+        <a href="index.html" class="back-link">← Back to ShentuBot</a>
+
+        <div class="footer">
+            <p><a href="privacy-policy.html">Privacy Policy</a> · <a href="terms-of-service.html">Terms of Service</a></p>
+            <p style="margin-top:4px">© 2026 ShentuBot. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

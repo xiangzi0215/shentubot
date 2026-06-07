@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShentuBot</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><rect width='40' height='40' rx='10' fill='url(%23g)'/><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23fe2c55'/><stop offset='100%25' stop-color='%2325f4ee'/></linearGradient></defs><text x='20' y='28' text-anchor='middle' fill='white' font-family='Arial,sans-serif' font-weight='700' font-size='24'>S</text></svg>" type="image/svg+xml">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap');
+
+        :root {
+            --bg: #0a0a0f;
+            --surface: #12121a;
+            --surface2: #1a1a26;
+            --border: #2a2a3a;
+            --text: #e8e8f0;
+            --text2: #8888a0;
+            --accent: #fe2c55;
+            --accent2: #25f4ee;
+            --success: #34d399;
+            --warning: #fbbf24;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background effects */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(254,44,85,0.08) 0%, transparent 50%),
+                        radial-gradient(ellipse at 70% 80%, rgba(37,244,238,0.06) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 24px;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 48px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .logo-text {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+        }
+
+        .logo-text span { color: var(--accent); }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-nav a {
+            color: var(--text2);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .header-nav a:hover {
+            color: var(--text);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 8px 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 14px;
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #ff6b8a);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* Steps */
+        .steps {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .step {
+            flex: 1;
+            padding: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step.active {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(254,44,85,0.1) 0%, var(--surface) 100%);
+        }
+
+        .step.completed {
+            border-color: var(--success);
+            background: linear-gradient(180deg, rgba(52,211,153,0.1) 0%, var(--surface) 100%);
+        }
+
+        .step-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text2);
+            margin-bottom: 4px;
+        }
+
+        .step.active .step-num { color: var(--accent); }
+        .step.completed .step-num { color: var(--success); }
+
+        .step-label {
+            font-size: 13px;
+            color: var(--text2);
+        }
+
+        .step.active .step-label { color: var(--text); }
+        .step.completed .step-label { color: var(--success); }
+
+        /* Main Panel */
+        .panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            display: none;
+        }
+
+        .panel.visible { display: block; }
+
+        .panel-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .panel-desc {
+            color: var(--text2);
+            font-size: 15px;
+            margin-bottom: 28px;
+            line-height: 1.6;
+        }
+
+        /* TikTok Login Button */
+        .tiktok-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 32px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .tiktok-btn:hover {
+            background: #e0274c;
+            transform: translateY(-1px);
+            box-shadow: 0 8px 24px rgba(254,44,85,0.3);
+        }
+
+        .tiktok-btn svg { width: 20px; height: 20px; }
+
+        /* Scope list */
+        .scope-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .scope-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--surface2);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .scope-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--success);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .scope-name {
+            font-weight: 600;
+            color: var(--accent2);
+        }
+
+        /* Task cards */
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .task-card {
+            padding: 20px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .task-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .task-card.selected {
+            border-color: var(--accent);
+            background: linear-gradient(180deg, rgba(254,44,85,0.08) 0%, var(--surface2) 100%);
+        }
+
+        .task-name {
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--text2);
+        }
+
+        .task-price {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        /* Video preview */
+        .video-preview {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .video-thumb {
+            width: 180px;
+            height: 320px;
+            background: var(--surface2);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-thumb::after {
+            content: '▶';
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            background: rgba(254,44,85,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .video-info { flex: 1; }
+
+        .video-info h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .video-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+
+        .video-info-label { color: var(--text2); }
+        .video-info-value { font-weight: 500; }
+
+        /* Publish settings */
+        .settings-group {
+            margin-top: 24px;
+        }
+
+        .settings-group label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--surface2);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .settings-group input[type="checkbox"] {
+            accent-color: var(--accent);
+            width: 18px;
+            height: 18px;
+        }
+
+        .privacy-select {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .privacy-option {
+            padding: 8px 16px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .privacy-option.active {
+            border-color: var(--accent);
+            background: rgba(254,44,85,0.1);
+            color: var(--accent);
+        }
+
+        /* Progress */
+        .progress-container {
+            margin: 24px 0;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: var(--surface2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            border-radius: 2px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .progress-steps {
+            list-style: none;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 14px;
+            color: var(--text2);
+        }
+
+        .progress-step.active { color: var(--text); }
+        .progress-step.done { color: var(--success); }
+
+        .progress-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .progress-step.active .progress-icon {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .progress-step.done .progress-icon {
+            border-color: var(--success);
+            background: var(--success);
+            color: var(--bg);
+        }
+
+        /* Success */
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--success), #2dd4bf);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 24px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .success-text {
+            text-align: center;
+        }
+
+        .success-text h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+
+        .success-text p {
+            color: var(--text2);
+            font-size: 15px;
+        }
+
+        .tiktok-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--accent2);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Nav buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 32px;
+        }
+
+        .btn-secondary {
+            padding: 12px 24px;
+            background: var(--surface2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 14px;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-primary {
+            padding: 12px 32px;
+            background: var(--accent);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .btn-primary:hover { background: #e0274c; }
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--text2);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--accent2);
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">S</div>
+                <div class="logo-text">Shentu<span>Bot</span></div>
+            </div>
+            <div class="header-nav">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+            </div>
+            <div class="user-info" id="userInfo" style="display:none">
+                <div class="avatar"></div>
+                <span id="userName">shentu_user</span>
+                <div class="status-dot"></div>
+            </div>
+        </div>
+
+        <!-- Steps -->
+        <div class="steps">
+            <div class="step active" id="step1">
+                <div class="step-num">01</div>
+                <div class="step-label">Authorize</div>
+            </div>
+            <div class="step" id="step2">
+                <div class="step-num">02</div>
+                <div class="step-label">Select Task</div>
+            </div>
+            <div class="step" id="step3">
+                <div class="step-num">03</div>
+                <div class="step-label">Create Content</div>
+            </div>
+            <div class="step" id="step4">
+                <div class="step-num">04</div>
+                <div class="step-label">Publish</div>
+            </div>
+        </div>
+
+        <!-- Panel 1: Authorize -->
+        <div class="panel visible" id="panel1">
+            <div class="panel-title">Connect Your TikTok Account</div>
+            <div class="panel-desc">
+                Authorize ShentuBot to publish videos to your TikTok account. 
+                We only request the minimum permissions needed.
+            </div>
+
+            <ul class="scope-list">
+                <li>
+                    <div class="scope-check">✓</div>
+                    <span class="scope-name">video.publish</span>
+                    <span>— Publish videos directly to your TikTok account</span>
+                </li>
+                <li>
+                    <div class="scope-check">✓</div>
+                    <span class="scope-name">user.info.basic</span>
+                    <span>— Read your basic profile information</span>
+                </li>
+            </ul>
+
+            <div style="margin-top:24px">
+                <button class="tiktok-btn" onclick="doLogin()">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.73a8.19 8.19 0 004.76 1.52V6.8a4.84 4.84 0 01-1-.11z"/>
+                    </svg>
+                    Login with TikTok
+                </button>
+            </div>
+        </div>
+
+        <!-- Panel 2: Select Task -->
+        <div class="panel" id="panel2">
+            <div class="panel-title">Select a Promotion Task</div>
+            <div class="panel-desc">Choose a task from the available campaigns to create content for.</div>
+
+            <div class="task-grid">
+                <div class="task-card selected" onclick="selectTask(this)">
+                    <div class="task-name">CapCut - Video Editor</div>
+                    <div class="task-meta">
+                        <span class="task-price">$0.15 / install</span>
+                        <span>Stock: 5,200</span>
+                    </div>
+                </div>
+                <div class="task-card" onclick="selectTask(this)">
+                    <div class="task-name">Lemon8 - Lifestyle App</div>
+                    <div class="task-meta">
+                        <span class="task-price">$0.20 / install</span>
+                        <span>Stock: 3,800</span>
+                    </div>
+                </div>
+                <div class="task-card" onclick="selectTask(this)">
+                    <div class="task-name">TikTok Lite</div>
+                    <div class="task-meta">
+                        <span class="task-price">$0.10 / install</span>
+                        <span>Stock: 10,000</span>
+                    </div>
+                </div>
+                <div class="task-card" onclick="selectTask(this)">
+                    <div class="task-name">TikTok Shop Seller</div>
+                    <div class="task-meta">
+                        <span class="task-price">$0.25 / signup</span>
+                        <span>Stock: 2,100</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-secondary" onclick="goStep(1)">Back</button>
+                <button class="btn-primary" onclick="goStep(3)">Continue</button>
+            </div>
+        </div>
+
+        <!-- Panel 3: Content -->
+        <div class="panel" id="panel3">
+            <div class="panel-title">Review Generated Content</div>
+            <div class="panel-desc">AI-generated video based on the selected task. Review before publishing.</div>
+
+            <div class="video-preview">
+                <div class="video-thumb"></div>
+                <div class="video-info">
+                    <h4>CapCut Amazing Transitions Tutorial ✂️</h4>
+                    <div class="video-info-row">
+                        <span class="video-info-label">Duration</span>
+                        <span class="video-info-value">15 seconds</span>
+                    </div>
+                    <div class="video-info-row">
+                        <span class="video-info-label">Resolution</span>
+                        <span class="video-info-value">1080 × 1920 (9:16)</span>
+                    </div>
+                    <div class="video-info-row">
+                        <span class="video-info-label">Format</span>
+                        <span class="video-info-value">MP4 / H.264</span>
+                    </div>
+                    <div class="video-info-row">
+                        <span class="video-info-label">File Size</span>
+                        <span class="video-info-value">4.2 MB</span>
+                    </div>
+                    <div class="video-info-row">
+                        <span class="video-info-label">AI Prompt</span>
+                        <span class="video-info-value" style="color:var(--accent2)">CapCut transition effects...</span>
+                    </div>
+
+                    <div class="settings-group">
+                        <label>
+                            <input type="checkbox" checked> Add background music
+                        </label>
+                        <label>
+                            <input type="checkbox" checked> Add subtitles
+                        </label>
+                    </div>
+
+                    <div style="margin-top:16px">
+                        <div style="font-size:13px;color:var(--text2);margin-bottom:8px">Privacy Level</div>
+                        <div class="privacy-select">
+                            <div class="privacy-option active" onclick="selectPrivacy(this)">Public</div>
+                            <div class="privacy-option" onclick="selectPrivacy(this)">Friends</div>
+                            <div class="privacy-option" onclick="selectPrivacy(this)">Private</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-secondary" onclick="goStep(2)">Back</button>
+                <button class="btn-primary" onclick="goStep(4)">Publish to TikTok</button>
+            </div>
+        </div>
+
+        <!-- Panel 4: Publishing -->
+        <div class="panel" id="panel4">
+            <div class="panel-title">Publishing to TikTok...</div>
+            <div class="panel-desc">Your video is being uploaded and published via the Content Posting API.</div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <ul class="progress-steps">
+                    <li class="progress-step done" id="ps1">
+                        <div class="progress-icon">✓</div>
+                        Query creator info
+                    </li>
+                    <li class="progress-step done" id="ps2">
+                        <div class="progress-icon">✓</div>
+                        Initialize video upload
+                    </li>
+                    <li class="progress-step active" id="ps3">
+                        <div class="progress-icon">3</div>
+                        Uploading video chunks...
+                    </li>
+                    <li class="progress-step" id="ps4">
+                        <div class="progress-icon">4</div>
+                        Processing on TikTok servers
+                    </li>
+                    <li class="progress-step" id="ps5">
+                        <div class="progress-icon">5</div>
+                        Publish complete
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-secondary" disabled>Back</button>
+                <button class="btn-primary" disabled id="btnDone">Done</button>
+            </div>
+        </div>
+
+        <!-- Panel 5: Success -->
+        <div class="panel" id="panel5">
+            <div class="success-icon">✓</div>
+            <div class="success-text">
+                <h3>Video Published Successfully!</h3>
+                <p>Your video has been published to your TikTok account.</p>
+                <a href="#" class="tiktok-link" onclick="return false">
+                    🔗 View on TikTok → https://tiktok.com/@user/video/7483920...
+                </a>
+            </div>
+
+            <div style="margin-top:32px; padding:20px; background:var(--surface2); border-radius:12px;">
+                <div style="font-size:14px; font-weight:600; margin-bottom:12px;">API Response</div>
+                <pre style="font-size:13px; color:var(--accent2); line-height:1.6; white-space:pre-wrap;">POST /v2/post/publish/video/init/ → 200 OK
+{
+  "data": {
+    "publish_id": "v_pub_file~v2-1.7483920183",
+    "upload_url": "https://open-upload.tiktokapis.com/video/..."
+  }
+}
+
+PUT upload_url (chunk 1/1) → 200 OK
+
+POST /v2/post/publish/status/fetch/ → 200 OK
+{
+  "data": {
+    "status": "PUBLISH_COMPLETE",
+    "permalink": "https://www.tiktok.com/@user/video/7483920183"
+  }
+}</pre>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn-secondary" onclick="resetAll()">Start Over</button>
+                <button class="btn-primary" onclick="resetAll()">Publish Another</button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>ShentuBot uses the <a href="https://developers.tiktok.com/doc/content-posting-api-get-started" target="_blank">TikTok Content Posting API</a> with explicit user authorization.</p>
+            <p style="margin-top:4px"><a href="terms-of-service.html">Terms of Service</a> · <a href="privacy-policy.html">Privacy Policy</a></p>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function goStep(n) {
+            // Hide all panels
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+            // Show target panel
+            document.getElementById('panel' + n).classList.add('visible');
+            // Update step indicators
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById('step' + i);
+                step.classList.remove('active', 'completed');
+                if (i < n) step.classList.add('completed');
+                else if (i === n) step.classList.add('active');
+            }
+            currentStep = n;
+
+            // If going to publish step, animate progress
+            if (n === 4) {
+                animatePublish();
+            }
+        }
+
+        function doLogin() {
+            // Simulate OAuth redirect and callback
+            const btn = document.querySelector('.tiktok-btn');
+            btn.textContent = 'Redirecting to TikTok...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '✓ Authorized Successfully';
+                btn.style.background = 'var(--success)';
+
+                document.getElementById('userInfo').style.display = 'flex';
+                document.getElementById('userName').textContent = 'tiktok_creator';
+
+                setTimeout(() => goStep(2), 800);
+            }, 1500);
+        }
+
+        function selectTask(el) {
+            document.querySelectorAll('.task-card').forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function selectPrivacy(el) {
+            document.querySelectorAll('.privacy-option').forEach(o => o.classList.remove('active'));
+            el.classList.add('active');
+        }
+
+        function animatePublish() {
+            const fill = document.getElementById('progressFill');
+            const steps = [
+                { id: 'ps3', progress: 40, delay: 800 },
+                { id: 'ps4', progress: 70, delay: 2000 },
+                { id: 'ps5', progress: 100, delay: 3500 },
+            ];
+
+            let prevId = 'ps3';
+            steps.forEach((s, i) => {
+                setTimeout(() => {
+                    // Mark previous as done
+                    const prev = document.getElementById(prevId);
+                    if (prev) {
+                        prev.classList.remove('active');
+                        prev.classList.add('done');
+                        prev.querySelector('.progress-icon').textContent = '✓';
+                    }
+
+                    // Mark current as active
+                    const curr = document.getElementById(s.id);
+                    curr.classList.add('active');
+
+                    fill.style.width = s.progress + '%';
+
+                    prevId = s.id;
+
+                    // Last step
+                    if (i === steps.length - 1) {
+                        setTimeout(() => {
+                            curr.classList.remove('active');
+                            curr.classList.add('done');
+                            curr.querySelector('.progress-icon').textContent = '✓';
+
+                            // Show success panel
+                            setTimeout(() => {
+                                document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+                                document.getElementById('panel5').classList.add('visible');
+                                // Update step indicators all completed
+                                for (let i = 1; i <= 4; i++) {
+                                    document.getElementById('step' + i).classList.remove('active');
+                                    document.getElementById('step' + i).classList.add('completed');
+                                }
+                            }, 600);
+                        }, 800);
+                    }
+                }, s.delay);
+            });
+        }
+
+        function resetAll() {
+            // Reset everything
+            document.querySelectorAll('.panel').forEach(p => p.classList.remove('visible'));
+            document.getElementById('panel1').classList.add('visible');
+            for (let i = 1; i <= 4; i++) {
+                const step = document.getElementById('step' + i);
+                step.classList.remove('active', 'completed');
+            }
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('userInfo').style.display = 'none';
+
+            const btn = document.querySelector('.tiktok-btn');
+            btn.innerHTML = `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.34-6.34V8.73a8.19 8.19 0 004.76 1.52V6.8a4.84 4.84 0 01-1-.11z"/></svg>Login with TikTok`;
+            btn.style.background = 'var(--accent)';
+            btn.disabled = false;
+
+            // Reset progress
+            document.getElementById('progressFill').style.width = '0%';
+            ['ps1','ps2','ps3','ps4','ps5'].forEach(id => {
+                const el = document.getElementById(id);
+                el.classList.remove('active', 'done');
+            });
+            document.getElementById('ps1').classList.add('done');
+            document.getElementById('ps2').classList.add('done');
+            document.getElementById('ps3').classList.add('active');
+
+            currentStep = 1;
+        }
+    </script>
+</body>
+</html>
